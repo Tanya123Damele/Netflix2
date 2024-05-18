@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Clone</title>
+  <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'assets/home.css' %}" />
+</head>
+
+<body bgcolor="black">
+  <!-- header start-->
+  <header id="header" class="black-bg">
+    <div class="header-cont container">
+      <div class="left-cont">
+        <img class="brand" src="/static/assets/netflix logo.png" alt="" />
+        <ul class="main-nav">
+          <a href="{% url 'netflixapp:Home' %}">
+            <li class="nav-item">Home</li>
+          </a>
+          <a href="{% url 'netflixapp:tv_show' %}">
+            <li class="nav-item">TV Shows</li>
+          </a>
+          <a href="{% url 'netflixapp:Home' %}">
+            <li class="nav-item">Movies</li>
+          </a>
+          <a href="{% url 'netflixapp:popular' %}">
+            <li class="nav-item">Popular</li>
+          </a>
+          <a href="{% url 'netflixapp:random' %}">
+            <li class="nav-item active">Random Play</li>
+          </a>
+          <a href="{% url 'netflixapp:contact' %}">
+            <li class="nav-item">Contact Us</li>
+          </a>
+        </ul>
+      </div>
+      <div class="right-cont">
+        <!-- <img src="images/notification icon.png" alt="" width="24" height="24"> -->
+        <a href="{% url 'netflixapp:profile-list' %}"><img src="/static/assets/user image.png" alt="" width="40"
+            height="40" /></a>
+        <a href="{% url 'account_logout' %}"><button class="logout-button">LogOut</button>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- movies section -->
+  <div class="random-movies-cont" id="random-movies-cont"
+    style="display: flex; flex-direction: row; margin: 100px 50px 0px 50px">
+    <div class="left-random" id="left-random"></div>
+    <div class="right-random" id="right-random"></div>
+  </div>
+  <!-- movies section end -->
+
+  <script>
+    const apikey = 'b17104b361e84fd187be40fcef837714';
+    const apiEndpoint = 'https://api.themoviedb.org/3';
+
+
+    const apiPaths = {
+      fetchMoviesList: `${apiEndpoint}/discover/movie?api_key=${apikey}`,
+    }
+
+    function init() {
+      fetchMovies();
+    }
+
+    function fetchMovies() {
+      fetchAndbuildMovieSection(apiPaths.fetchMoviesList)
+        .then(list => {//promise chaining
+          const randomIndex = parseInt(Math.random() * list.length);
+          searchMoviesTrailer(list[randomIndex]);
+        }).catch(err => {
+          console.error(err);
+        });
+    }
+
+    function fetchAndbuildMovieSection(fetchUrl) {
+      // console.log(fetchUrl);
+      return fetch(fetchUrl)
+        .then(res => res.json())
+        .then(res => {
+          const movies = res.results;
+          return movies;
+        })
+        .catch(err => console.error(err))
+
+    }
+
+    function searchMoviesTrailer(movieName) {
+      if (!movieName) return;
+
+      const videoList = ['../static/assets/movie1.mp4', '../static/assets/movie2.mp4', '../static/assets/movie3.mp4', '../static/assets/movie4.mp4'];
+
+      const randomVideo = parseInt(Math.random() * videoList.length);
+      const selectedVideo = videoList[randomVideo];
+
+      const leftVideoCont = document.getElementById('left-random');
+      leftVideoCont.innerHTML = `
+                <video width="800px" height="500px" controls>
+                    <source src="${selectedVideo}" type="video/mp4">
+                    <source src="${selectedVideo}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `
+      const rightVideoCont = document.getElementById('right-random');
+      rightVideoCont.innerHTML = `
+                <h2 class="video-title" style="color: white; font-size: 50px; text-align: center;">${movieName.original_title}</h2>
+                <p class="video-overview" style="color: white; font-size: 22px; margin-left: 15px;">${movieName.overview}
+                </p>
+            `
+    }
+
+    window.addEventListener('load', function () {
+      init();
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <header class="min-h-screen w-full bg-black bg-opacity-75 showcase border-gray-600 border-b-8 flex justify-center py-20 bg-no-repeat"  style="background-image: url('{% static 'assets/background_netflix.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 w-5/12 h-full flex items-center flex-col">
+            <form class="bg-black bg-opacity-70 py-8 px-4 w-8/12 rounded-md mt-24    " method="POST" >
+                {% csrf_token %}
+                <h1 class="text-4xl font-semibold text-center ">
+                    Sign In
+                </h1>
+                <div class=" text-center my-4">
+                    {% if form.errors %}
+                    <p class="text-primary_red ">
+                        {{form.non_field_errors}}
+                    </p>
+                    {% endif %}
+                   
+                </div>
+                <div> 
+                    <Label class='text-lg font-medium mb-3 rounded-sm'>
+                        Email
+                    </Label>
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="email" name="login" id="id_login" placeholder="Your Email">
+                </div>
+                <div class='my-3'> 
+                    <Label class='text-lg font-medium mb-3 rounded-sm'>
+                        Password
+                    </Label>
+                    <input class="p-2 bg-gray-200 rounded-sm text-gray-900 outline-none block w-full" type="password" name="password" id="id_password" placeholder="Password">
+                </div>
+                <div class="flex justify-center items-center">
+                    <button class="py-2 px-4 my-3  bg-primary_red text-gray-100 font-medium w-full rounded-sm" type="submit">
+                       Sign In
+                    </button>
+                </div>
+
+
+                <div class="text-center my-4">
+                    <p>
+                        New to Netflix? <a href="{% url 'account_signup' %}" class="text-white-600  font-semibold red"> Sign Up Now</a>
+                    </p>
+                </div>
+                <p>This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.</p>
+            </form> 
+        </div>
+    </header>
+    {% endblock content %}

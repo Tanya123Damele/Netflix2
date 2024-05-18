@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="{% static 'assets/home.css' %}">
+  <script src="{% static 'assets/popular.js' %}"></script>
+  
+</head>
+
+<body bgcolor="black">
+  <!-- header start-->
+  <header id="header" class="black-bg" style="margin-bottom: 50px; background-color: black;">
+    <div class="header-cont container">
+      <div class="left-cont">
+        <img class="brand" src="/static/assets/netflix logo.png" alt="">
+        <ul class="main-nav">
+          <a href="{% url 'netflixapp:Home' %}">
+            <li class="nav-item">Home</li>
+          </a>
+
+          <a href="{% url 'netflixapp:tv_show' %}">
+            <li class="nav-item">TV Shows</li>
+          </a>
+
+          <a href="{% url 'netflixapp:Home' %}">
+            <li class="nav-item">Movies</li>
+          </a>
+
+          <a href="{% url 'netflixapp:popular' %}">
+            <li class="nav-item active">Popular</li>
+          </a>
+          <a href="{% url 'netflixapp:random' %}">
+            <li class="nav-item">Random Play</li>
+          </a>
+          <a href="{% url 'netflixapp:contact' %}">
+            <li class="nav-item">Contact Us</li>
+          </a>
+        </ul>
+      </div>
+      <div class="right-cont">
+
+        <a href="{% url 'netflixapp:profile-list' %}"><img src="/static/assets/user image.png" alt="" width="40"
+            height="40"></a>
+        <a href="{% url 'netflixapp:profile-list' %}"></a>
+        <a href="{% url 'account_logout' %}"><button class="logout-button">Logout</button>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- movies section -->
+  <div class="movies-cont container" id="movies-cont" style="margin-top: 100px;">
+  </div>
+  <!-- movies section end -->
+
+  <!-- <iframe width="420" height="315"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
+    </iframe> -->
+  <div class="footer">
+    <div class="footWidth">
+      Questions? Call <a href="tel:000-800-919-1694" class="tel-link">000-800-919-1694</a>
+      <div>
+        <ul class="footLay">
+
+
+          <li class="footList"><a href="https://help.netflix.com/en/" class="footLink">Help Centre</a></li>
+
+          <li class="footList">
+            <a href="https://media.netflix.com/en/" class="footLink">Media Centre</a>
+          </li>
+          </li>
+          <li class="footList">
+            <a href="https://jobs.netflix.com/" class="footLink">Jobs</a>
+          </li>
+
+          <li class="footList">
+            <a href="https://help.netflix.com/legal/termsofuse" class="footLink">Terms and Use</a>
+          </li>
+          <li class="footList">
+            <a href="https://help.netflix.com/legal/termsofuse" class="footLink">Privacy</a>
+          </li>
+
+          </li>
+          <li class="footList">
+            <a href="https://help.netflix.com/en/node/134094" class="footLink">Corporate Information</a>
+          </li>
+          <li class="footList">
+            <a href="/contact/" class="footLink">Contact Us</a>
+          </li>
+
+          <li class="footList">
+            <a href="https://help.netflix.com/legal/notices" class="footLink">Legal Notices</a>
+          </li>
+          <li class="footList">
+            <a href="#" class="footLink">Only on Netflix</a>
+          </li>
+        </ul>
+
+      </div>
+      <p class="text-center mt-4 text-sm copyright">
+        &copy; Netflix India | Created by Group1
+      </p>
+
+
+
+      </ul>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="{% static 'assets/favicon.png' %}" type="image/x-icon">
+    <script src="{% static 'assets/index.js' %}"></script>
+    <script src="{% static 'assets/script.js' %}"></script>
+    <script src="{% static 'assets/popular.js' %}"></script>
+</head>
+<script>
+    function init(){
+        playVideo();
+    }
+
+    function playVideo(){
+        const videoList = ['../static/assets/movie4.mp4','../static/assets/movie3.mp4','../static/assets/movie2.mp4','../static/assets/movie1.mp4'];
+
+        const randomVideo = parseInt(Math.random() * videoList.length);
+        const selectedVideo = videoList[randomVideo];
+
+        const upperVideoCont = document.getElementById('cont');
+        upperVideoCont.innerHTML = `
+            <video width="100%" height="90%" controls name='video'>
+                <source src="${selectedVideo}" type="video/mp4">
+                <source src="${selectedVideo}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        `    
+    }
+
+    window.addEventListener('load', function(){
+        init();
+    })
+</script>
+<body bgcolor="black">
+    <div class="cont" id="cont">
+        
+    </div>
+    <div class="lower-cont" id="lower-cont">
+        <!-- const lowerCont = document.getElementById('lower-cont');
+    lowerCont.innerHTML = `
+        <h3 class="moviename">${item.title}</h3>
+        <p class="movie-desc">${item.overview}</p>
+    ` -->
+    </div>
+</body>
+</html>
